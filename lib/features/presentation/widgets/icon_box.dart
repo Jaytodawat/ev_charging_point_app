@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class IconBox extends StatelessWidget {
-  IconBox({super.key, required this.onPressed, required this.icon, this.boxColor, this.iconColor});
-  void Function()? onPressed;
-  IconData icon;
-  Color? boxColor;
-  Color? iconColor;
+  const IconBox({super.key, required this.onPressed, required this.icon, this.boxColor, this.iconColor});
+  final void Function()? onPressed;
+  final IconData icon;
+  final Color? boxColor;
+  final Color? iconColor;
 
 
   @override

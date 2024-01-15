@@ -64,7 +64,7 @@ class RoundedSubButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Text(text,
-            style:  TextStyle(
+            style:  const TextStyle(
               fontSize: 10,
               color: Colors.white,
             ),

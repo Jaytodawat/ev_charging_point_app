@@ -1,25 +1,21 @@
 import 'package:ev_charging_point_app/features/presentation/providers/station_provider.dart';
-import 'package:ev_charging_point_app/features/presentation/screens/add_station.dart';
+import 'package:ev_charging_point_app/features/presentation/screens/coming_soon_screen.dart';
 import 'package:ev_charging_point_app/features/presentation/screens/home_screen.dart';
 import 'package:ev_charging_point_app/features/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../providers/providers.dart';
+import '../providers/index_providers.dart';
 import '../widgets/size_config.dart';
 
 class MainScreen extends ConsumerWidget {
-  final PageController _pageController = PageController();
-  final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
-
   MainScreen({super.key});
 
   final List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    const Text('2'),
-    AddStation(),
-    const Text('4'),
-    ProfileScreen(),
+    const HomeScreen(),
+    const ComingSoonScreen(),
+    const ComingSoonScreen(),
+    const ComingSoonScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -69,7 +65,9 @@ class MainScreen extends ConsumerWidget {
                 label: "Profile"),
           ],
           onTap: (value) {
-            ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
+            ref.read(indexBottomNavbarProvider.notifier).update(
+                  (state) => value,
+                );
           },
         ),
       ),

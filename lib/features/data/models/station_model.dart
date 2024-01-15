@@ -1,41 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive/hive.dart';
 
 import '../../domain/entities/station.dart';
 
-// part 'station_model.g.dart';
-//
-// @HiveType(typeId: 0)
 class StationModel {
-  // @HiveField(0)
-  // final String id;
-  // @HiveField(1)
-  // final String name;
-  // @HiveField(2)
-  // final int type;
-  // @HiveField(3)
-  // bool isAvailable;
-  // @HiveField(4)
-  // final String shortAddress;
-  // @HiveField(5)
-  // final String address;
-  // @HiveField(6)
-  // final String about;
-  // @HiveField(7)
-  // int likeCount;
-  // @HiveField(8)
-  // final int power;
-  // @HiveField(9)
-  // final double price;
-  // @HiveField(10)
-  // final String headingImage;
-  // @HiveField(11)
-  // final String tileImage;
-  // @HiveField(12)
-  // final double distance;
-  // @HiveField(13)
-  // bool isLiked;
-
   late String id;
   late String name;
   late int type;

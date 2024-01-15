@@ -1,28 +1,31 @@
 import 'package:ev_charging_point_app/features/data/models/user_model.dart';
 import 'package:ev_charging_point_app/features/presentation/providers/auth_provider.dart';
-import 'package:ev_charging_point_app/features/presentation/screens/login_screen.dart';
 import 'package:ev_charging_point_app/features/presentation/widgets/reusable_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants.dart';
+import '../providers/login_provider.dart';
+import '../providers/login_state.dart';
 import '../widgets/custom_button.dart';
 
 class SignUpScreen extends ConsumerWidget {
   SignUpScreen({super.key});
 
   final TextEditingController nameController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController mobileController = TextEditingController();
-
   final TextEditingController vehicleController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<LoginState>(loginControllerProvider, (previous, state) {
+      if (state is LoginStateError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.message)));
+      }
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -107,7 +110,7 @@ class SignUpScreen extends ConsumerWidget {
                   ReusableTextField(
                       controller: vehicleController,
                       labelText: 'Car Name',
-                      obsecureText: true,
+                      obsecureText: false,
                       icon: const Icon(
                         Icons.electric_car,
                       )),
@@ -117,16 +120,27 @@ class SignUpScreen extends ConsumerWidget {
                   Center(
                     child: RoundedButton(
                         onPressed: () {
-                          ref.read(authRepositoryProvider).addUser(
-                                UserModel(
-                                    name: nameController.text,
-                                    contact: mobileController.text,
-                                    carName: vehicleController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text),
-                              );
-                          Navigator.pop(context);
+                          // try {
+                            ref.read(authRepositoryProvider).addUser(
+                              UserModel(
+                                name: nameController.text,
+                                contact: mobileController.text,
+                                carName: vehicleController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
+                          // } catch (e){
+                          //   print(e.toString());
+                          //   ScaffoldMessenger.of(context)
+                          //       .showSnackBar(SnackBar(content: Text(e.toString())));
+                          // }
 
+                          nameController.dispose();
+                          emailController.dispose();
+                          mobileController.dispose();
+                          vehicleController.dispose();
+                          passwordController.dispose();
                         },
                         text: 'Register'),
                   ),
@@ -139,7 +153,7 @@ class SignUpScreen extends ConsumerWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                           Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: Text(
                             'Log In',

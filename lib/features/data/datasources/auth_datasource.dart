@@ -1,6 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ev_charging_point_app/core.exceptions/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core.exceptions/auth_exception.dart';
@@ -25,9 +26,8 @@ class AuthDataSource{
       // Add data to Firestore
       await firebaseFirestore.collection('users').doc(id).set(data);
       signInWithEmailAndPassword(userModel.email, userModel.password);
-    } catch (error) {
-      // Handle errors here
-      print('Error adding data to Firestore: $error');
+    } catch (e){
+      throw AuthException('Error Occured');
     }
 
 
@@ -47,9 +47,9 @@ class AuthDataSource{
         return UserModel(name: 'Dummy', contact: '12345678', carName: 'Dummy', email: 'dummy', password: 'dummy');
       }
     } catch (e) {
-      print(e.toString());
+        throw AuthException(e.toString());
+
     }
-    return UserModel(name: 'Dummy', contact: '12345678', carName: 'Dummy', email: 'dummy', password: 'dummy');
   }
 
   Future<User?> signInWithEmailAndPassword(
@@ -63,9 +63,6 @@ class AuthDataSource{
       return result.user;
 
     }on FirebaseAuthException catch(e){
-      // print('error');
-      print(e.code);
-      print(e.code == 'invalid-credential');
 
       if(e.code=='user-not-found'){
         throw AuthException('User Not Found');

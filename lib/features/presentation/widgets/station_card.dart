@@ -1,9 +1,6 @@
-import 'package:ev_charging_point_app/features/presentation/providers/station_provider.dart';
 import 'package:ev_charging_point_app/features/presentation/screens/station_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../data/models/station_model.dart';
 import '../../domain/entities/station.dart';
 import '../../../constants.dart';
 
@@ -13,13 +10,8 @@ class StationCard extends ConsumerWidget {
 
   const StationCard(this.index, {super.key, required this.station});
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    // final chargingStatus = ref.watch(chargingStatusProvider1);
-
     return GestureDetector(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 7.0),
@@ -42,7 +34,8 @@ class StationCard extends ConsumerWidget {
                     height: 100,
                     width: 100,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
                       child: Image(
                         image: NetworkImage(station.tileImage),
                         fit: BoxFit.cover,
@@ -120,9 +113,7 @@ class StationCard extends ConsumerWidget {
                                   : Colors.yellowAccent.shade700,
                             ),
                             child: Text(
-                              station.isAvailable
-                                  ? 'Available'
-                                  : 'Charging',
+                              station.isAvailable ? 'Available' : 'Charging',
                               style: kSubTextStyle.copyWith(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
@@ -137,8 +128,16 @@ class StationCard extends ConsumerWidget {
           ),
         ),
       ),
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => StationDetailScreen(station: station, stationIndex: index, )));
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StationDetailScreen(
+              station: station,
+              stationIndex: index,
+            ),
+          ),
+        );
       },
     );
   }

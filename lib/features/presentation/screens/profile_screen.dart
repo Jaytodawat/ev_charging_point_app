@@ -1,13 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ev_charging_point_app/constants.dart';
 import 'package:ev_charging_point_app/features/presentation/providers/auth_provider.dart';
-import 'package:ev_charging_point_app/features/presentation/providers/login_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ev_charging_point_app/features/presentation/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../data/models/user_model.dart';
-import '../providers/providers.dart';
+import '../providers/index_providers.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -19,7 +16,7 @@ class ProfileScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // While the Future is still running, show a loading indicator.
-          return CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           // If an error occurs during the Future execution, show an error message.
           return Text('Error: ${snapshot.error}');
@@ -72,7 +69,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
           );
         } else {
-          return Text('No user data available.');
+          return const Text('No user data available.');
         }
       }
     );

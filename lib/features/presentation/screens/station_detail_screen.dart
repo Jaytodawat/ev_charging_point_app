@@ -2,8 +2,6 @@ import 'package:ev_charging_point_app/features/domain/entities/station.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/models/station_model.dart';
-import '../providers/station_provider.dart';
 import '../../../constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/icon_box.dart';
@@ -12,7 +10,8 @@ class StationDetailScreen extends ConsumerWidget {
   final int stationIndex;
   final Station station;
 
-  const StationDetailScreen({super.key, required this.stationIndex, required this.station});
+  const StationDetailScreen(
+      {super.key, required this.stationIndex, required this.station});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +49,7 @@ class StationDetailScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      RoundedSubButton(onPressed: (){}, text: 'Help'),
+                      RoundedSubButton(onPressed: () {}, text: 'Help'),
                     ],
                   ),
                   const SizedBox(
@@ -86,20 +85,25 @@ class StationDetailScreen extends ConsumerWidget {
                       const SizedBox(
                         height: 10,
                       ),
-
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             station.name,
-                            style: kSubTextStyle1.copyWith(fontSize: 16),
+                            style: kSubTextStyle1.copyWith(
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              )),
                         ],
                       ),
-
                       const SizedBox(
                         height: 10,
                       ),
-
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -114,11 +118,9 @@ class StationDetailScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-
                       const SizedBox(
                         height: 10,
                       ),
-
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -127,29 +129,26 @@ class StationDetailScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 ' Open ',
-                                style: kSubTextStyle.copyWith(color: Colors.green.shade700),
+                                style: kSubTextStyle.copyWith(
+                                    color: Colors.green.shade700),
                               ),
-
                               Icon(
                                 Icons.circle,
                                 size: 5,
                                 color: Colors.green.shade700,
                               ),
-
                               Text(
                                 ' 24 Hrs',
-                                style: kSubTextStyle.copyWith(color: Colors.green.shade700),
+                                style: kSubTextStyle.copyWith(
+                                    color: Colors.green.shade700),
                               ),
-
                             ],
                           ),
                         ],
                       ),
-
                       const SizedBox(
                         height: 10,
                       ),
-
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -158,26 +157,25 @@ class StationDetailScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 ' Type ${station.type} ',
-                                style: kSubTextStyle.copyWith(color: Colors.grey),
+                                style:
+                                    kSubTextStyle.copyWith(color: Colors.grey),
                               ),
-
                               const Icon(
                                 Icons.circle,
                                 size: 5,
                                 color: Colors.grey,
                               ),
-
                               Text(
                                 ' ${station.power}kW   ',
-                                style: kSubTextStyle.copyWith(color: Colors.grey),
+                                style:
+                                    kSubTextStyle.copyWith(color: Colors.grey),
                               ),
-
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 0),
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(15)),
                                   color: station.isAvailable
                                       ? Colors.green.shade400
                                       : Colors.yellowAccent.shade700,
@@ -187,66 +185,72 @@ class StationDetailScreen extends ConsumerWidget {
                                       ? 'Available'
                                       : 'Charging',
                                   style: kSubTextStyle.copyWith(
-                                      fontSize: 10, fontWeight: FontWeight.bold),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
-
                             ],
                           ),
                         ],
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Text(
-                      //       "By ${recipe.author}",
-                      //       style: kSubTextStyle.copyWith(fontSize: 11),
-                      //     ),
-                      //   ],
-                      // ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        '\$${station.price}/kW',
+                        style: kSubTextStyle1.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     TextIcon(
-                      //       iconData: Icons.star,
-                      //       text: recipe.rating.toStringAsFixed(2),
-                      //       iconColor: Colors.yellow.shade800,
-                      //     ),
-                      //     TextIcon(
-                      //       iconData: Icons.thumb_up_outlined,
-                      //       text: '${recipe.vote}',
-                      //     ),
-                      //     TextIcon(
-                      //       iconData: Icons.timer_outlined,
-                      //       text: recipe.prepTime,
-                      //     ),
-                      //     TextIcon(
-                      //       iconData: Icons.fastfood_sharp,
-                      //       text: '${recipe.recordHealth.capitalize}',
-                      //     ),
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(bottom: 5.0),
-                      //   child: Text("Cuisine : ${recipe.cuisine}"),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(bottom: 5.0),
-                      //   child: Text("Course : ${recipe.course}"),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(bottom: 5.0),
-                      //   child: Text("Diet : ${recipe.diet}"),
-                      // ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
+                      Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: const Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.navigation_outlined),
+                                  Text(
+                                    'Navigate',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: const Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.share),
+                                  Text('Share', style: TextStyle(fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Text(
                         "About",
                         style: kSubTextStyle1.copyWith(fontSize: 16),
@@ -263,22 +267,6 @@ class StationDetailScreen extends ConsumerWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        "Ingredients",
-                        style: kSubTextStyle1.copyWith(fontSize: 16),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      // Column(
-                      //   children: List.generate(
-                      //     lst.length,
-                      //         (index) => Align(
-                      //       alignment: Alignment.centerLeft,
-                      //       child: Text("${index + 1}. ${lst[index]}"),
-                      //     ),
-                      //   ),
-                      // )
                     ],
                   )
                 ],
@@ -292,9 +280,7 @@ class StationDetailScreen extends ConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: RoundedButton(
                   text: "Charge Here",
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                 ),
               ),
             ),
