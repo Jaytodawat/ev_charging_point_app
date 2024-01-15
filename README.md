@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-- [APK File Link](https://docs.flutter.dev/get-started/codelab](https://drive.google.com/file/d/1rrIxd7lEcklo4BsbRxz5Q8_d0MQ5wz6z/view?usp=drive_link)
+- [APK File Link](https://drive.google.com/file/d/1rrIxd7lEcklo4BsbRxz5Q8_d0MQ5wz6z/view?usp=drive_link)
 
 
 ## Getting Started
